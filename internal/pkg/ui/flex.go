@@ -2,15 +2,15 @@ package ui
 
 import (
 	"github.com/gdamore/tcell/v2"
-	"github.com/rivo/tview"
+	"gitlab.com/tslocum/cview"
 )
 
 type Flex struct {
-	*tview.Flex
+	*cview.Flex
 }
 
 func NewFlex() *Flex {
-	flex := tview.NewFlex()
+	flex := cview.NewFlex()
 	flex.SetBackgroundColor(tcell.ColorDefault)
 	return &Flex{
 		Flex: flex,
@@ -18,15 +18,16 @@ func NewFlex() *Flex {
 }
 
 func NewFlexWithBorder(title string) *Flex {
-	flex := tview.NewFlex()
-	flex.SetBackgroundColor(tcell.ColorDefault)
+	flex := NewFlex()
 	flex.SetBorder(true)
+	flex.SetBorderColor(tcell.ColorWhite)
+	flex.SetBorderColorFocused(tcell.ColorRed)
+	flex.ShowFocus(true)
 	if title != "" {
 		flex.SetTitle(title)
 	}
-	return &Flex{
-		Flex: flex,
-	}
+
+	return flex
 }
 
 func (f *Flex) SetErrorBorder() {
